@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Employee Directory</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <h1>Employee Directory</h1>
+      <div class="search-filter">
+        <input type="text" placeholder="Search by name or email" id="searchInput" />
+        <button id="toggleFilter">Filter</button>
+        <a href="form.html"><button class="add-btn">Add Employee</button></a>
+      </div>
+    </div>
+  </header>
+
+  <aside class="filter-sidebar" id="filterSidebar">
+    <h3>Filter/Sort/Search</h3>
+    <input type="text" id="filterFirstName" placeholder="First Name" />
+    <input type="text" id="filterDepartment" placeholder="Department" />
+    <input type="text" id="filterRole" placeholder="Role" />
+    <button onclick="applyFilter()">Apply</button>
+    <button onclick="resetFilter()">Reset</button>
+  </aside>
+
+  <main>
+    <div class="top-controls">
+      <label for="sort">Sort:</label>
+      <select id="sort">
+        <option value="">Select...</option>
+        <option value="firstName">First Name</option>
+        <option value="department">Department</option>
+      </select>
+
+      <label for="pagination">Show:</label>
+      <select id="pagination">
+        <option value="10">10</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
+    </div>
+
+   <div class="employee-card">
+  <strong>Alice Smith</strong><br>
+  Email: alice@example.com<br>
+  Department: HR<br>
+  Role: Manager<br>
+  <button>Edit</button>
+  <button>Delete</button>
+</div>
+<div class="employee-card">
+  <strong>Bob Johnson</strong><br>
+  Email: bob@example.com<br>
+  Department: IT<br>
+  Role: Developer<br>
+  <button>Edit</button>
+  <button>Delete</button>
+</div>
+
+
+  </main>
+
+  <footer>
+    © 2025 Employee Directory App. All rights reserved.
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
