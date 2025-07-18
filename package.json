@@ -1,0 +1,25 @@
+{
+  "name": "employee-directory",
+  "version": "1.0.0",
+  "description": "This is a frontend UI assignment project built using HTML, CSS, JavaScript, and Freemarker templates.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "live-server --no-browser",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rosemani22/Employee-Directory.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rosemani22/Employee-Directory/issues"
+  },
+  "homepage": "https://github.com/rosemani22/Employee-Directory#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "live-server": "^1.2.2"
+  }
+}

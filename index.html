@@ -1,34 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Directory</title>
-  <link rel="stylesheet" href="css/styles.css" />
+<head >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Employee Directory</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-  <header>
-    <div class="header-content">
-      <h1>Employee Directory</h1>
-      <div class="search-filter">
-        <input type="text" placeholder="Search by name or email" id="searchInput" />
-        <button id="toggleFilter">Filter</button>
-        <a href="form.html"><button class="add-btn">Add Employee</button></a>
-      </div>
+<body class="bg-gray-100 font-sans">
+
+<header class="bg-white shadow py-4">
+  <div class="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+    
+    <!-- Title and Subtitle -->
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">Employee Directory</h1>
+      <p class="text-gray-600 text-sm sm:text-base">Manage your team efficiently</p>
     </div>
-  </header>
+    </header>
 
-  <aside class="filter-sidebar" id="filterSidebar">
-    <h3>Filter/Sort/Search</h3>
-    <input type="text" id="filterFirstName" placeholder="First Name" />
-    <input type="text" id="filterDepartment" placeholder="Department" />
-    <input type="text" id="filterRole" placeholder="Role" />
-    <button onclick="applyFilter()">Apply</button>
-    <button onclick="resetFilter()">Reset</button>
-  </aside>
+    <!-- Search & Filters -->
+<div class="mb-4 flex flex-col md:flex-row items-center gap-4">
+  <input id="searchInput" type="text" placeholder="Search by name or email..." class="border px-3 py-2 rounded w-full md:w-1/3" />
+   <div class="flex items-center gap-3">
+      <button id="addEmployeeBtn" class="bg-green-500 hover:bg-green-600 px-1 py-1 rounded text-white font-semibold">
+        + Add Employee
+      </button>
+         <button id="toggleFilterSidebar" class="fixed top-4 right-4 bg-gray-800 text-white px-3 py-1 rounded z-50">
+             Filter
+        </button>
+        </div>
 
-  <main>
-    <div class="top-controls">
+  <select id="departmentFilter" class="border px-3 py-2 rounded">
+    <option value="">All Departments</option>
+    <option value="Engineering">Engineering</option>
+    <option value="Marketing">Marketing</option>
+    <option value="HR">HR</option>
+    <option value="Sales">Sales</option>
+  </select>
+
+    
       <label for="sort">Sort:</label>
       <select id="sort">
         <option value="">Select...</option>
@@ -43,32 +55,144 @@
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
+   
+
+</div>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto my-6 px-4">
+        <div id="employeeGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <!-- Employee cards will be rendered here -->
+             
+        </div>
+    </main>
+
+    <!-- Pagination Controls -->
+<div class="mt-6 flex justify-center items-center gap-4" id="paginationControls">
+  <button id="prevBtn" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Previous</button>
+  <span id="paginationInfo" class="text-sm text-gray-600"></span>
+  <button id="nextBtn" class="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">Next</button>
+</div>
+
+
+
+    <!-- Add/Edit Employee Modal -->
+    <!-- <div id="employeeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50"> -->
+     <div id="employeeModal" class="hidden">
+
+
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg relative">
+            <span class="absolute top-2 right-4 text-gray-600 text-xl cursor-pointer close">&times;</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add Employee</h2>
+            
+            <form id="employeeForm" novalidate>
+             <input type="hidden" id="editId" name="editId" /> 
+
+                  <!-- Employee ID -->
+<div class="mb-4">
+  <label class="block text-sm font-medium text-gray-700">Employee ID</label>
+  <input type="text" id="employeeId" name="employeeId" required
+    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+</div>
+
+                <!-- First Name -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1">First Name</label>
+                    <input type="text" id="firstName" name="firstName" class="w-full border rounded px-3 py-2" />
+                    <p id="firstNameError" class="text-red-500 text-sm error-message"></p>
+                </div>
+                
+
+                <!-- Last Name -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" class="w-full border rounded px-3 py-2" />
+                    <p id="lastNameError" class="text-red-500 text-sm error-message"></p>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1">Email</label>
+                    <input type="email" id="email" name="Email" class="w-full border rounded px-3 py-2" />
+                    <p id="emailError" class="text-red-500 text-sm error-message"></p>
+                </div>
+
+                <!-- Department -->
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-semibold mb-1">Department</label>
+                    <select id="department" name="department" class="w-full border rounded px-3 py-2">
+                        <option value="">Select Department</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="HR">HR</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Sales">Sales</option>
+                    </select>
+                    <p id="departmentError" class="text-red-500 text-sm error-message"></p>
+                </div>
+
+                <!-- Role -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-1">Role</label>
+                    <select id="role" name="role" class="w-full border rounded px-3 py-2">
+                        <option value="">Select Role</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Engineer">Engineer</option>
+                        <option value="Intern">Intern</option>
+                        <option value="Analyst">Analyst</option>
+                    </select>
+                    <p id="roleError" class="text-red-500 text-sm error-message"></p>
+                </div>
+           
+                
+                <!-- Buttons -->
+                <div class="flex justify-end gap-3">
+                    <button type="button" id="cancelBtn" class="bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded">
+                        Cancel
+                    </button>
+  
+                    <button type="submit" id="saveEmployeeBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
-   <div class="employee-card">
-  <strong>Alice Smith</strong><br>
-  Email: alice@example.com<br>
-  Department: HR<br>
-  Role: Manager<br>
-  <button>Edit</button>
-  <button>Delete</button>
-</div>
-<div class="employee-card">
-  <strong>Bob Johnson</strong><br>
-  Email: bob@example.com<br>
-  Department: IT<br>
-  Role: Developer<br>
-  <button>Edit</button>
-  <button>Delete</button>
-</div>
+    
 
-
-  </main>
-
-  <footer>
+    <!-- Footer -->
+   <footer class="bg-gray-30 min-h-screen flex flex-col items-center justify-center py-2">
     © 2025 Employee Directory App. All rights reserved.
   </footer>
 
-  <script src="js/main.js"></script>
+<!-- Filter Sidebar on Right -->
+<aside id="filterSidebar" class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg p-4 z-50 transform translate-x-full transition-transform duration-300">
+  <h3 class="text-lg font-semibold mb-4">Filter / Sort / Search</h3>
+
+  <div class="mb-3">
+    <label class="block text-gray-700 text-sm font-semibold mb-1">First Name</label>
+    <input type="text" id="filterFirstName" class="w-full border px-3 py-2 rounded" placeholder="e.g. John" />
+  </div>
+
+  <div class="mb-3">
+    <label class="block text-gray-700 text-sm font-semibold mb-1">Department</label>
+    <input type="text" id="filterDepartment" class="w-full border px-3 py-2 rounded" placeholder="e.g. Sales" />
+  </div>
+
+  <div class="mb-3">
+    <label class="block text-gray-700 text-sm font-semibold mb-1">Role</label>
+    <input type="text" id="filterRole" class="w-full border px-3 py-2 rounded" placeholder="e.g. Engineer" />
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <button onclick="applyFilter()" id="applyFilterBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Apply</button>
+    <button onclick="resetFilter()" class="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400">Reset</button>
+  </div>
+</aside>
+
+
+    <!-- JS Script -->
+    <script src="js/app.js"></script>
 </body>
 </html>

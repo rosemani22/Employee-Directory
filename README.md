@@ -1,5 +1,8 @@
 # Employee Directory Web Interface
+Employee Directory
+A responsive and interactive Employee Directory Web Interface built with vanilla HTML, CSS, and JavaScript.
 
+Features
 This is a frontend UI assignment project built using HTML, CSS, JavaScript, and Freemarker templates.
 
 ## Features
@@ -13,25 +16,10 @@ This is a frontend UI assignment project built using HTML, CSS, JavaScript, and 
 ## 📁 Project Structure
 ```
 employee-directory/
-├── index.html
-├── form.html
-├── mockData.html
-├── css/
-│   └── styles.css
+├── index.htmll
 ├── js/
-│   ├── form.js
-│   └── main.js
+│   ├── app.js
+│   
 
 
-## 🧠 Reflection
-**Challenges Faced:**
-- Handling filtering/sorting with dynamic DOM
-- Freemarker integration without backend
 
-**Improvements (with more time):**
-- Implement full CRUD using localStorage
-- Modularize form validation
-- Add unit tests and accessibility enhancements
-
----
-© 2025 Employee Directory App
